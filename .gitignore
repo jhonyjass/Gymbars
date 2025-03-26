@@ -1,3 +1,10 @@
+# My
+migrations/
+bin/
+wkhtmltopdf.exe
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,0 +1,11 @@
+gunicorn == 20.1.0
+Flask == 2.2.5
+Flask-SQLAlchemy == 3.1.1
+psycopg2 == 2.9.9
+alembic == 1.13.1
+Flask-Migrate == 4.0.5
+bcrypt == 4.1.2 
+Flask-APScheduler == 1.13.1
+python-dotenv == 1.0.1
+python-decouple == 3.8
+pdfkit == 1.0.0

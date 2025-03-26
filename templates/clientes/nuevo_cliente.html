@@ -1,0 +1,215 @@
+{% extends "index.html" %}
+{% block title %} Clientes {% endblock %}
+{% block body %}
+<section class="py-3">
+    <div class="container">
+        <form action="{{ url_for('clientes_bp.nuevo_cliente') }}" method="post" class="needs-validation" novalidate>
+
+            <!-- Información personal -->
+            <div class="col-md-12 mb-4">
+                <h4 class="fw-bold mb-3">Información Personal</h4>
+                <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+
+                <div class="card-body">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="60" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="dpi" class="form-label">DPI</label>
+                            <input type="number" class="form-control" id="dpi" name="dpi" maxlength="14" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+                                required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="edad" class="form-label">Edad</label>
+                            <input type="number" class="form-control" id="edad" name="edad" maxlength="3" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="sexo" class="form-label">Sexo</label>
+                            <select class="form-select" id="sexo" name="sexo" required>
+                                <option value="" selected disabled>Seleccionar</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" maxlength="100"
+                                required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="correo" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="correo" name="correo" maxlength="60" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="objetivo" class="form-label">Objetivo</label>
+                            <select class="form-select" id="objetivo" name="objetivo" required>
+                                <option value="" selected disabled>Seleccionar</option>
+                                {% for objetivos in objetivos %}
+                                <option value="{{ objetivos.id_objetivo }}">{{ objetivos.nombre_objetivo }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teléfonos personales -->
+            <div class="col-md-12">
+                <h4 class="fw-bold mb-3">Teléfonos Personales y Emergencia</h4>
+                <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+                <div class="card-body">
+                    <div id="phone-container"></div>
+                    <div class="d-flex justify-content-end mt-4 mb-2">
+                        <button type="button" class="btn btn-link text-secondary" id="add-phone-button">
+                            <i class="bi bi-plus-lg me-2"></i> 
+                            Añadir más telefonos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de salud -->
+            <div class="col-md-12 mb-4">
+                <h4 class="fw-bold mb-3">Información de Salud</h4>
+                <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <label for="grupo_sanguineo" class="form-label">Grupo sanguíneo</label>
+                        <select class="form-select" id="grupo_sanguineo" name="grupo_sanguineo" required>
+                            <option value="" selected disabled>Selecciona tu grupo sanguíneo</option>
+                            <option value="A+">A positivo (A+)</option>
+                            <option value="A-">A negativo (A-)</option>
+                            <option value="B+">B positivo (B+)</option>
+                            <option value="B-">B negativo (B-)</option>
+                            <option value="AB+">AB positivo (AB+)</option>
+                            <option value="AB-">AB negativo (AB-)</option>
+                            <option value="O+">O positivo (O+)</option>
+                            <option value="O-">O negativo (O-)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5>Afecciones</h5>
+                        <span class="text-secondary">Selecciona las afecciones que tengas</span>
+                    </div>
+                    
+                    <div class="row row-cols-1 row-cols-md-2">
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    type="checkbox" 
+                                    id="hipertension_arterial"
+                                    name="hipertension_arterial"
+                                >
+                                <label class="form-check-label" for="hipertension_arterial">
+                                    Hipertensión arterial
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="diabetes" name="diabetes">
+                                <label class="form-check-label" for="diabetes">Diabetes</label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    type="checkbox" 
+                                    id="afecciones_alergicas"
+                                    name="afecciones_alergicas"
+                                >
+                                <label class="form-check-label" for="afecciones_alergicas">
+                                    Afecciones alérgicas
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    type="checkbox" 
+                                    id="afecciones_respiratorias"
+                                    name="afecciones_respiratorias"
+                                >
+                                <label class="form-check-label" for="afecciones_respiratorias">Afecciones
+                                    alérgicas
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    type="checkbox"     
+                                    id="afecciones_cardiovasculares"
+                                    name="afecciones_cardiovasculares"
+                                >
+                                <label class="form-check-label" for="afecciones_cardiovasculares">
+                                    Afecciones cardiovasculares
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    type="checkbox" 
+                                    id="afecciones_osteoarticulares"
+                                    name="afecciones_osteoarticulares"
+                                >
+                                <label class="form-check-label" for="afecciones_osteoarticulares">
+                                    Afecciones osteoarticulares
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fuma" name="fuma">
+                                <label class="form-check-label" for="fuma">Fuma</label>
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    type="checkbox" 
+                                    id="consume_alcohol"
+                                    name="consume_alcohol"
+                                >
+                                <label class="form-check-label" for="consume_alcohol">Consume alcohol</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-dark font-monospace" type="submit">
+                    Guardar Cliente
+                </button>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+{% endblock %}

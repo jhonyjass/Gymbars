@@ -1,0 +1,16 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+      {% for category, message in messages %}
+          {% set custom_messages = { 'success': 'Excelente', 'error': 'Error' } %}
+          <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show shadow alert-sonner" role="alert">
+              {% if category == 'error' %}
+              <i class="me-2">&#10060;</i>
+              {% elif category == 'success' %}
+              <i class="me-2">&#10004;</i>
+              {% endif %}
+              <strong>{{ custom_messages[category] }}</strong> {{ message }}
+              <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+          </div>
+      {% endfor %}
+  {% endif %}
+{% endwith %}

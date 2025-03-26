@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block title %} 404 {% endblock %}
+{% block content %}
+
+
+
+<section class="d-flex align-items-center min-vh-100 py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 order-md-2">
+                <div class="lc-block">
+                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_kcsr6fcp.json"
+                        background="transparent" 
+                        speed="1" 
+                        loop="" 
+                        autoplay="">
+                    </lottie-player>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-md-start ">
+                <div class="lc-block mb-3">
+                    <div editable="rich">
+                        <h1 class="display-1 fw-bold text-muted">Error 404</h1>
+                    </div>
+                </div>
+                <div class="lc-block">
+                    <div class="text-secondary ">
+                        <h1 class="fw-bold font-monospace h5">Pagina no encontrada<br></h1>
+                    </div>
+                </div>
+                <div class="lc-block mb-5">
+                    <div>
+                        <p class="text-secondary"> 
+                            La página que estás buscando fue movida, eliminada o podría no haber existido nunca.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

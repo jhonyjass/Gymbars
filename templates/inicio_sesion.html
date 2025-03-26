@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block title %} Iniciar sesion {% endblock %}
+{% block content %}
+{% include 'alertas/alerta_general.html' %}
+
+<section class="form-signin w-100 m-auto">
+
+  <form action="{{url_for('sesion_usuario_bp.iniciar_sesion')}}" method="POST" class="needs-validation" novalidate>
+
+    <div class="text-center">
+      <h1 class="h3 mb-3 fw-bold">Iniciar sesion</h1>
+    </div>
+
+    <div class=" mb-2">
+      <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario" required>
+    </div>
+
+    <div class="mb-2 position-relative">
+      <input type="password" class="form-control pe-5" name="contraseña" id="contraseña" placeholder="Contraseña"
+        required>
+      <span id="togglePassword"
+        class="position-absolute top-50 end-0 translate-middle-y material-icons text-secondary p-2  bi bi-eye-slash-fill"
+        style="cursor: pointer; right: 10px;">
+      </span>
+    </div>
+
+    <button class="btn btn-dark w-100 btn-sm" type="submit">Iniciar sesion</button>
+
+    <div class="text-center">
+      <p class="mt-4 mb-2 text-secondary">© Gymbars</p>
+    </div>
+
+  </form>
+</section>
+
+
+{% endblock %}

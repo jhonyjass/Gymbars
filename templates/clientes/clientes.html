@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% block title %} Clientes {% endblock %}
+{% block body %}
+
+<section class="py-3 mb-5">
+    <div class="d-flex justify-content-between mb-2 mt-5">
+        <h5 class="fw-bold mt-0">Lista de clientes</h5>
+        <div class="btn-group" role="group">
+            <a href="{{url_for('clientes_bp.nuevo_cliente')}}" class="btn btn-dark font-monospace">
+                Nuevo cliente
+            </a>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-12 col-xl-12">
+        <div class="card widget-card border-light-subtle">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dpi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-clientes">
+                            {% for cliente in clientes %}
+                            <tr>
+                                <td>
+                                    <a href="">
+                                        <h6 class="text-secondary-emphasis mb-1">
+                                            {{cliente.nombre}} 
+                                        </h6>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="">
+                                        <h6 class="text-secondary-emphasis mb-1 "> 
+                                            {{cliente.dpi}} 
+                                        </h6>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

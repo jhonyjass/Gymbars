@@ -1,0 +1,284 @@
+*,
+a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+
+
+/*----------------------------------------------------------------------------
+Tema 
+----------------------------------------------------------------------------*/
+:root {
+    --bs-body-bg: #f4f5f7;
+    --bs-body-color: #212529;
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg: #121212;
+    --bs-body-color: #e0e0e0;
+    --bs-primary: #bb86fc;
+    --bs-secondary: #03dac6;
+    --bs-link-color: #bb86fc;
+}
+
+/*----------------------------------------------------------------------------
+Fin tema 
+----------------------------------------------------------------------------*/
+
+
+/*Scroll*/
+body::-webkit-scrollbar {
+    width: 0px;
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------
+Formularios
+----------------------------------------------------------------------------*/
+
+.form-control, .form-select {
+    border-radius: 10px !important;
+}
+
+
+
+/*----------------------------------------------------------------------------
+Fin Formularios
+----------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------
+Iniciar sesion
+----------------------------------------------------------------------------*/
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.form-signin :focus-within {
+    z-index: 2;
+}
+
+/*----------------------------------------------------------------------------
+Fin iniciar sesion 
+----------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------
+Alerta mensajes
+----------------------------------------------------------------------------*/
+
+/* Contenedor que envolvera la alertas dentro del contenido */
+.content {
+    position: relative;
+    overflow: hidden;
+}
+
+/* alerta flotante */
+.alert-sonner {
+    position: absolute;
+    top: 30px;
+    /*bottom: 30px;*/
+    left: 50%;
+    transform: translateX(-50%);
+    width: fixed;
+    padding: 15px 20px;
+    font-size: 14px;
+    border-radius: 10px;
+    opacity: 0.9;
+    /* encima de otros elementos */
+    z-index: 1050;
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Animacion para la alerta */
+@keyframes slideIn {
+    from {
+        transform: translateY(-55px) translateX(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) translateX(-50%);
+        opacity: 1;
+    }
+}
+
+
+.alert-sonner i {
+    font-size: 18px;
+}
+
+/* Estilo para cerrar la alerta */
+.alert-sonner .btn-close {
+    opacity: 0.7;
+}
+
+
+/*----------------------------------------------------------------------------
+Fin Alerta mensajes
+----------------------------------------------------------------------------*/
+
+
+
+
+
+/*----------------------------------------------------------------------------
+Botones
+----------------------------------------------------------------------------*/
+.btn {
+    border-radius: 10px;
+    padding: 0.30rem 0.5rem;
+    font-size: 0.785rem;
+    line-height: 1.4;
+}
+
+/* Boton sidebar menu */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #007bff;
+    color: white;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-btn i {
+    color: white;
+    font-size: 24px;
+}
+
+.floating-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/*Hovers negros*/
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #343a4038 !important;
+    color: white !important;
+    
+}
+
+/* Fin boton sidebar menu */
+
+/*----------------------------------------------------------------------------
+  Fin botones
+----------------------------------------------------------------------------*/
+
+
+
+
+/*----------------------------------------------------------------------------
+Sidebar
+----------------------------------------------------------------------------*/
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    width: 260px;
+}
+
+
+#logo {
+    font-size: 18px;
+}
+
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    #logo {
+        font-size: 20px;
+    }
+}
+
+
+
+.nav-pills .nav-link {
+    margin-bottom: 5px;
+}
+
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #242323;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: cursive;
+    text-transform: uppercase;
+}
+
+/* Evita color azul en los enlaces del sidebar */
+#sidebar a, .offcanvas a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+/*----------------------------------------------------------------------------
+Fin sidebar 
+----------------------------------------------------------------------------*/
+
+
+textarea:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+    border-color: #777; /* Gris neutro */
+    box-shadow: 0 1px 1px rgba(100, 100, 100, 0.158) inset, 0 0 8px rgba(100, 100, 100, 0.158);
+    outline: 0 none;
+    appearance: none;
+}
+
+

@@ -1,0 +1,84 @@
+{% extends "index.html" %}
+{% block title %} Perfil {% endblock %}
+{% block body %}
+
+
+<section class="d-flex align-items-center justify-content-center" style="min-height: 90vh;">
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        <div>
+            
+            <div class="d-flex flex-column align-items-center">
+                <div class="text-end" style="width: 80%;">
+                    <button onclick="toggleTheme()" class="btn rounded-fill" id="temaButton">
+                        <i id="iconoMoon" class="d-none" style="font-size: 18px;">&#127771;</i>
+                        <i id="iconoSun" class="" style="font-size: 18px;">&#127774;</i>
+                    </button>
+                </div>
+            
+                <div class="col-12 mt-2">
+                    <div class="card-body text-center p-2">
+                        <h2 class="fw-bold mb-1">{{ session['usuario'].nombre }}</h2>
+                        <p class="text-secondary mb-2">{{ session['usuario'].tipo_usuario }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <form action="{{url_for('sesion_usuario_bp.editar_perfil')}}" method="POST" class="needs-validation" novalidate>
+
+                    <div class="col-md-6 mx-auto mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" 
+                            id="nombre" 
+                            name="nombre"
+                            value="{{session['usuario'].nombre}}" 
+                            maxlength="20" 
+                            required
+                        >
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-6 mx-auto mb-3">
+                        <label for="usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" 
+                            id="usuario" 
+                            name="usuario"
+                            value="{{session['usuario'].usuario}}" 
+                            maxlength="20" 
+                            required
+                        >
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-6 mx-auto mb-3">
+                        <label for="contraseña" class="form-label">Contraseña nueva</label>
+                        <div class="position-relative">
+                            <input type="password" class="form-control pe-5" 
+                                name="contraseña" 
+                                id="contraseña"
+                                placeholder="Nueva contraseña" 
+                                maxlength="30"
+                            >
+                            <span id="togglePassword"
+                                class="position-absolute top-50 end-0 translate-middle-y material-icons text-secondary p-2  bi bi-eye-slash-fill"
+                                style="cursor: pointer; right: 10px;">
+                            </span>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mx-auto mb-3">
+                        <div class="text-end">
+                            <button class="btn btn-dark font-monospace" type="submit">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
