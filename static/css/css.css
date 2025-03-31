@@ -258,8 +258,14 @@ Fin sidebar
 ----------------------------------------------------------------------------*/
 
 
+
+
+/*----------------------------------------------------------------------------
+Campos formularios
+----------------------------------------------------------------------------*/
+
 textarea:focus,
-select:focus,
+select.form-select:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="datetime"]:focus,
@@ -275,10 +281,30 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {   
-    border-color: #777; /* Gris neutro */
+    border-color: #777;
     box-shadow: 0 1px 1px rgba(100, 100, 100, 0.158) inset, 0 0 8px rgba(100, 100, 100, 0.158);
-    outline: 0 none;
-    appearance: none;
+    outline: 0 none !important;
+    appearance: none !important;
 }
 
 
+/*----------------------------------------------------------------------------
+Fin Campos formularios
+----------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------
+Medidas de cliente
+----------------------------------------------------------------------------*/
+.medidas_nom_column {
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+
+/*----------------------------------------------------------------------------
+Fin Medidas de cliente
+----------------------------------------------------------------------------*/

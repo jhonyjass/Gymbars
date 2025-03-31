@@ -104,7 +104,7 @@ class afecciones(conexion.Model):
         self.consume_alcohol = consume_alcohol
 
 
-class Medidas(conexion.Model):
+class medidas(conexion.Model):
     __tablename__ = "medidas"
 
     id_medidas = conexion.Column(Integer, primary_key=True)

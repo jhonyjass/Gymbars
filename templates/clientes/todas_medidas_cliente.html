@@ -1,0 +1,167 @@
+{% extends "index.html" %}
+{% block title %} Todas la medidas {% endblock %}
+{% block body %}
+
+<section class="py-3">
+    <div class="container">
+        <h3 class="fw-bold mb-3">Todas las Medidas de {{cliente.nombre.split(' ')[0]}}</h3>
+
+        <div class="card widget-card border-light-subtle">
+            <div class="card-body">
+            
+                <!-- Tabla de medidas -->
+                <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th class="medidas_nom_column">Nombre Medida</th>
+                                {% for medida in cliente.medidas %}
+                                    <th>{{ medida.fecha_hora.strftime('%e %b %Y') }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Fila de 'Hora' -->
+                            <tr>
+                                <td class="medidas_nom_column">Hora</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.fecha_hora.strftime('%I:%M %p') }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Cuello' -->
+                            <tr>
+                                <td class="medidas_nom_column">Cuello</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.cuello }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Pecho' -->
+                            <tr>
+                                <td class="medidas_nom_column">Pecho</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.pecho }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Brazo Derecho' -->
+                            <tr>
+                                <td class="medidas_nom_column">Brazo Derecho</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.brazo_derecho }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Brazo Izquierdo' -->
+                            <tr>
+                                <td class="medidas_nom_column">Brazo Izquierdo</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.brazo_izquierdo }}</td>
+                                {% endfor %}
+                            </tr>
+        
+                            <!-- Fila de 'Antebrazo Derecho' -->
+                            <tr>
+                                <td class="medidas_nom_column">Antebrazo Derecho</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.antebrazo_derecho }}</td>
+                                {% endfor %}
+                            </tr>
+        
+                            <!-- Fila de 'Antebrazo Izquierdo' -->
+                            <tr>
+                                <td class="medidas_nom_column">Antebrazo Izquierdo</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.antebrazo_izquierdo }}</td>
+                                {% endfor %}
+                            </tr>
+        
+                            <!-- Fila de 'Cintura' -->
+                            <tr>
+                                <td class="medidas_nom_column">Cintura</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.cintura }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Cadera' -->
+                            <tr>
+                                <td class="medidas_nom_column">Cadera</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.cadera }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Muslo Derecho' -->
+                            <tr>
+                                <td class="medidas_nom_column">Muslo Derecho</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.muslo_derecho }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Muslo Izquierdo' -->
+                            <tr>
+                                <td class="medidas_nom_column">Muslo Izquierdo</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.muslo_izquierdo }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Pantorilla Derecha' -->
+                            <tr>
+                                <td class="medidas_nom_column">Pantorilla Derecha</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.pantorilla_derecha }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Pantorilla Izquierda' -->
+                            <tr>
+                                <td class="medidas_nom_column">Pantorilla Izquierda</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.pantorilla_izquierda }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Muñeca Derecha' -->
+                            <tr>
+                                <td class="medidas_nom_column">Muñeca Derecha</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.muñeca_derecha }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Muñeca Izquierda' -->
+                            <tr>
+                                <td class="medidas_nom_column">Muñeca Izquierda</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.muñeca_izquierda }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Tobillo Derecho' -->
+                            <tr>
+                                <td class="medidas_nom_column">Tobillo Derecho</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.tobillo_derecho }}</td>
+                                {% endfor %}
+                            </tr>
+                            <!-- Fila de 'Tobillo Izquierdo' -->
+                            <tr>
+                                <td class="medidas_nom_column">Tobillo Izquierdo</td>
+                                {% for medida in cliente.medidas %}
+                                    <td>{{ medida.tobillo_izquierdo }}</td>
+                                {% endfor %}
+                            </tr>
+        
+                            <!-- Fila de 'Peso corporal' -->
+                            <tr>
+                                <td class="medidas_nom_column">Peso corporal</td>
+                                {% for medida in cliente.medidas %}
+                                    <td class="text-success">{{ medida.peso_corporal }} Lbs</td>
+                                {% endfor %}
+                            </tr>
+        
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+{% endblock %}

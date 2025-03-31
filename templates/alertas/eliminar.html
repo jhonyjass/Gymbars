@@ -1,0 +1,31 @@
+<!-- Modal de confirmación de eliminacion -->
+<div class="modal fade" id="confirmarEliminar" tabindex="-1" aria-labelledby="confirmarEliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-3 shadow">
+            <div class="text-end">
+                <button type="button" class="btn-close top-0 end-0 m-2" 
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body p-2 text-center">
+                <h3 class="fs-4 mb-2">¿Estás seguro?</h3>
+                <p class="text-secondary-emphasis">¿Estás seguro de eliminar este elemento?</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button 
+                    type="button" 
+                    class="btn btn-lg fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"
+                    data-bs-dismiss="modal">
+                    No gracias
+                </button>
+                <a 
+                    href="#"
+                    class="btn btn-lg fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" 
+                    id="eliminarLink">
+                    <strong>Si, eliminar</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

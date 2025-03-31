@@ -112,3 +112,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 /*-------------------------------------Fin Contador caracteres-----------------------------------*/
+
+
+
+/*-------------------Funcion para poder mandar url del obejeto a eliminar ---------------------------------------------- */
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener todos los botones de eliminar
+    const eliminarBtns = document.querySelectorAll('.eliminar-btn');
+
+    eliminarBtns.forEach(btn => {
+        // Agregar un listener de clic a cada boton
+        btn.addEventListener('click', function () {
+            // Obtener la URL de eliminar
+            const actionUrl = btn.getAttribute('data-action-url');
+            // Obtener el enlace de eliminacion
+            const eliminarLink = document.querySelector('#eliminarLink');
+            // Actualizar el atributo href del enlace de eliminar en el modal
+            eliminarLink.setAttribute('href', actionUrl);
+        });
+    });
+});
+
+/*-------------------Funcion para poder mandar url del obejeto a eliminar ---------------------------------------------- */

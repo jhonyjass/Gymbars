@@ -1,0 +1,105 @@
+<div class="modal fade" id="nuevoTelefonoCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Nuevo telefono
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{url_for('clientes_bp.nuevo_tel_cliente', id_cliente = cliente.id_cliente)}}" method="post" class="needs-validation" novalidate>
+                    <div class="col-md-12">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" id="telefono" name="telefono" maxlength="10" required>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="tipo_tel" class="form-label">Tipo de teléfono</label>
+                        <select class="form-select" aria-label="Default select example" id="tipo_tel" name="tipo_tel"
+                            required>
+                            <option value="" selected disabled>Tipo de teléfono</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Pareja">Pareja</option>
+                            <option value="Familiar">Familiar</option>
+                            <option value="Amigo">Amigo</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2 d-flex justify-content-center justify-content-md-end mt-3">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-dark" type="submit">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% for telefono in cliente.telefonos %}
+<div class="modal fade" id="modalTelefono{{ telefono.id_telefono }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Detalle telefono
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ url_for('clientes_bp.editar_tel_cliente', id_telefono=telefono.id_telefono) }}" method="post" class="needs-validation" novalidate>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" id="telefono" name="telefono" maxlength="10"
+                            value="{{ telefono.telefono }}" required>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="tipo_tel" class="form-label">Tipo de teléfono</label>
+                        <select class="form-select" aria-label="Default select example" id="tipo_tel" name="tipo_tel" required>
+                            <option value="" selected disabled>Tipo de teléfono</option>
+                            <option value="Personal" {% if telefono.tipo_telefono == 'Personal' %}selected{% endif %}>Personal</option>
+                            <option value="Pareja" {% if telefono.tipo_telefono == 'Pareja' %}selected{% endif %}>Pareja</option>
+                            <option value="Familiar" {% if telefono.tipo_telefono == 'Familiar' %}selected{% endif %}>Familiar</option>
+                            <option value="Amigo" {% if telefono.tipo_telefono == 'Amigo' %}selected{% endif %}>Amigo</option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="d-grid gap-2 d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn-outline-danger eliminar-btn" 
+                            data-bs-toggle="modal"
+                            data-bs-target="#confirmarEliminar" 
+                            data-action-url="{{ url_for('clientes_bp.eliminar_tel_cliente', id_telefono=telefono.id_telefono) }}">
+                            <i class="bi bi-trash3 me-2"></i>
+                            Eliminar
+                        </button>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-dark" type="submit">
+                                Actualizar
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

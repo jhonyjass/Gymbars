@@ -2,13 +2,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const addPhoneButton = document.getElementById("add-phone-button");
     const phoneContainer = document.getElementById("phone-container");
 
+    if (!phoneContainer) {
+        return;
+    }
+
     let phoneCount = 0;
 
-    // Funcion para agregar un telefono
     function addPhone() {
         phoneCount++;
 
-        // Crear un contenedor para telefonos
         const phoneDiv = document.createElement("div");
         phoneDiv.classList.add("row", "mt-3");
         phoneDiv.id = `phone-${phoneCount}`;
@@ -40,16 +42,16 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
         phoneContainer.appendChild(phoneDiv);
-
-        setupCharacterLimit(phoneDiv.querySelector(`#telefono_${phoneCount}`));
     }
 
-    // Agregar el primer telefono por defecto
-    addPhone();
+    // Verifica que addPhoneButton existe antes de agregar el evento
+    if (addPhoneButton) {
+        addPhoneButton.addEventListener("click", addPhone);
+    }
 
-    // Agregar mas telefonos
-    addPhoneButton.addEventListener("click", addPhone);
+    addPhone(); // Agregar el primer teléfono por defecto
 });
+
 
 // Funcion para eliminar un telefono
 function removePhone(phoneId) {

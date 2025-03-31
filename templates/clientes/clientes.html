@@ -27,14 +27,14 @@
                             {% for cliente in clientes %}
                             <tr>
                                 <td>
-                                    <a href="">
+                                    <a href="{{url_for('clientes_bp.info_cliente', id_cliente = cliente.id_cliente)}}">
                                         <h6 class="text-secondary-emphasis mb-1">
                                             {{cliente.nombre}} 
                                         </h6>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="">
+                                    <a href="{{url_for('clientes_bp.info_cliente', id_cliente = cliente.id_cliente)}}">
                                         <h6 class="text-secondary-emphasis mb-1 "> 
                                             {{cliente.dpi}} 
                                         </h6>

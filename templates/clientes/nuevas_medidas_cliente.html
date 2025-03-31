@@ -1,0 +1,133 @@
+{% extends "index.html" %}
+{% block title %} Medidas de cliente {% endblock %}
+{% block body %}
+
+<section class="py-3">
+    <div class="container">
+        <form action="{{url_for('clientes_bp.nuevas_medidas_cliente', id_cliente = cliente.id_cliente)}}" method="post" class="needs-validation" novalidate>
+
+            <div class="col-md-12 mb-4">
+                <h4 class="fw-bold mb-3">Nuevas medias para {{cliente.nombre.split(' ')[0]}} </h4>
+                <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+
+                <div class="card-body">
+                    <div class="row g-3">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="cuello" class="form-label">Cuello (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="cuello" name="cuello" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="pecho" class="form-label">Pecho (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="pecho" name="pecho" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="brazo_derecho" class="form-label">Brazo Derecho (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="brazo_derecho" name="brazo_derecho" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="brazo_izquierdo" class="form-label">Brazo Izquierdo (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="brazo_izquierdo" name="brazo_izquierdo" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="antebrazo_derecho" class="form-label">Antebrazo Derecho (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="antebrazo_derecho" name="antebrazo_derecho" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="antebrazo_izquierdo" class="form-label">Antebrazo Izquierdo (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="antebrazo_izquierdo" name="antebrazo_izquierdo" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="cintura" class="form-label">Cintura (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="cintura" name="cintura" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="cadera" class="form-label">Cadera (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="cadera" name="cadera" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="muslo_derecho" class="form-label">Muslo Derecho (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="muslo_derecho" name="muslo_derecho" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="muslo_izquierdo" class="form-label">Muslo Izquierdo (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="muslo_izquierdo" name="muslo_izquierdo" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="pantorilla_derecha" class="form-label">Pantorrilla Derecha (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="pantorilla_derecha" name="pantorilla_derecha" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="pantorilla_izquierda" class="form-label">Pantorrilla Izquierda (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="pantorilla_izquierda" name="pantorilla_izquierda" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="muñeca_derecha" class="form-label">Muñeca Derecha (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="muñeca_derecha" name="muñeca_derecha" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="muñeca_izquierda" class="form-label">Muñeca Izquierda (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="muñeca_izquierda" name="muñeca_izquierda" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="tobillo_derecho" class="form-label">Tobillo Derecho (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="tobillo_derecho" name="tobillo_derecho" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                            <label for="tobillo_izquierdo" class="form-label">Tobillo Izquierdo (cm)</label>
+                            <input type="number" step="0.01" class="form-control" id="tobillo_izquierdo" name="tobillo_izquierdo" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+        
+                        <div class="col-md-12 mb-3">
+                            <label for="peso_corporal" class="form-label">Peso Corporal (Lbs)</label>
+                            <input type="number" step="0.01" class="form-control" id="peso_corporal" name="peso_corporal" maxlength="6" required>
+                            <div class="error-message text-danger" style="display: none;"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-dark font-monospace" type="submit">
+                    Guardar medidas 
+                </button>
+            </div>
+
+        </form>
+    </div>
+</section>
+
+
+{% endblock %}
