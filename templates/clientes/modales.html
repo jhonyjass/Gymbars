@@ -18,7 +18,7 @@
 
                     <div class="col-md-12 mt-3">
                         <label for="tipo_tel" class="form-label">Tipo de teléfono</label>
-                        <select class="form-select" aria-label="Default select example" id="tipo_tel" name="tipo_tel"
+                        <select class="form-select" aria-label="Default select example" id="tipo_telefono" name="tipo_telefono"
                             required>
                             <option value="" selected disabled>Tipo de teléfono</option>
                             <option value="Personal">Personal</option>
@@ -70,7 +70,7 @@
 
                     <div class="col-md-12 mt-3">
                         <label for="tipo_tel" class="form-label">Tipo de teléfono</label>
-                        <select class="form-select" aria-label="Default select example" id="tipo_tel" name="tipo_tel" required>
+                        <select class="form-select" aria-label="Default select example" id="tipo_telefono" name="tipo_telefono" required>
                             <option value="" selected disabled>Tipo de teléfono</option>
                             <option value="Personal" {% if telefono.tipo_telefono == 'Personal' %}selected{% endif %}>Personal</option>
                             <option value="Pareja" {% if telefono.tipo_telefono == 'Pareja' %}selected{% endif %}>Pareja</option>
