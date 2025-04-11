@@ -8,6 +8,70 @@
 <section class="py-3">
     <div class="container">
 
+        <!-- Informacion de suscripcion -->
+        <div class="col-md-12 mb-4">
+ 
+            <div class="d-flex justify-content-between mb-2">
+                <h4 class="fw-bold mb-0">Estado suscripción</h4>
+                <div class="btn-group" role="group">
+                    {% if not cliente.suscripciones %}
+                    <a href="{{ url_for('suscripciones_bp.agregar_suscripcion', id_cliente=cliente.id_cliente) }}"
+                       class="btn btn-dark font-monospace">Activar Suscripción
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('suscripciones_bp.editar_suscripcion', id_cliente=cliente.id_cliente) }}"
+                       class="btn btn-dark font-monospace">Editar Suscripción
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        
+            <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+            {% if cliente.suscripciones %}
+                {% set suscripcion = cliente.suscripciones[0] %}
+                
+                <div class="row g-3">
+                    <div class="col-md-6 d-flex flex-wrap align-items-start">
+                        <label class="fw-bold me-2">Plan:</label>
+                        <p class="mb-0 text-break">
+                            {{ cliente.suscripciones[0].plan_cliente.nombre }}
+                            <strong class="fw-bold text-success">
+                                Q{{ cliente.suscripciones[0].plan_cliente.precio }}
+                            </strong>
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 d-flex flex-wrap align-items-start">
+                        <label class="fw-bold me-2">Fecha de suscripción:</label>
+                        <p class="mb-0 text-break">
+                            {{ suscripcion.fecha_suscripcion.strftime('%d %b %Y') }}
+                        </p>
+                    </div>
+                    
+                    <div class="col-md-6 d-flex flex-wrap align-items-start">
+                        <label class="fw-bold me-2">Suscripción:</label>
+                        {% if suscripcion.estado_suscripcion %}
+                            <span class="badge bg-success">Activa</span>
+                        {% else %}
+                            <span class="badge bg-danger">Inactiva</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+            {% else %}
+            
+                <div class="text-danger mb-3"> 
+                    &#128680; Este cliente no tiene una suscripción
+                    <a href="{{ url_for('suscripciones_bp.agregar_suscripcion', id_cliente=cliente.id_cliente) }}" 
+                        class="text-secondary"  style="text-decoration: underline;" >
+                        activar suscripción
+                        <i class="bi bi-arrow-right-short"></i>
+                    </a>
+                </div>
+
+            {% endif %}
+        </div>
+
         <!-- Informacion personal -->
         <div class="col-md-12 mb-4">
             <h4 class="fw-bold mb-3">Información Personal</h4>

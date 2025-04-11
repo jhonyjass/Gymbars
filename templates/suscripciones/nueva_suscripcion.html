@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block title %} Nueva suscripcion {% endblock %}
+{% block body %}
+
+
+<section class="py-3">
+    <div class="container">
+
+        <form action="{{url_for('suscripciones_bp.agregar_suscripcion', id_cliente = cliente.id_cliente)}}" 
+            method="post" class="needs-validation" novalidate>
+
+            <div class="col-md-12 mb-4">
+                <h4 class="fw-bold mb-3">Activar suscripcion</h4>
+                <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+
+                <div class="card-body">
+                    <div class="row g-3">
+
+                        <div class="col-md-12">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <div class="form-control" style="pointer-events: none;  backdrop-filter: blur(4px);">
+                                {{ cliente.nombre }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <label for="plan" class="form-label">Plan</label>
+                            <select class="form-select" id="plan" name="plan" required>
+                                <option value="" selected disabled>Seleccionar</option>
+                                {% for plan in planes %}
+                                <option value="{{plan.id_plan}}">
+                                    {{plan.nombre}} - Q{{plan.precio}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="estado" class="form-label">Estado de suscripcion</label>
+                            <select class="form-select" id="estado" name="estado" required>
+                                <option value="1">Activadar</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-dark font-monospace" type="submit">
+                                Activar suscripcion
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+
+
+
+{% endblock %}
