@@ -22,7 +22,8 @@ class ClientesRepository:
             joinedload(clientes.telefonos), 
             joinedload(clientes.afecciones),
             joinedload(clientes.direcciones),
-            joinedload(clientes.medidas)
+            joinedload(clientes.medidas),
+            joinedload(clientes.suscripciones)
         ).filter_by(id_cliente = id_cliente).first()
 
     @staticmethod

@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% block title %} Nueva suscripcion {% endblock %}
+{% block body %}
+
+
+<section class="py-3">
+    <div class="container">
+
+        <form action="{{url_for('suscripciones_bp.editar_suscripcion', id_cliente = cliente.id_cliente )}}" method="post" class="needs-validation" novalidate>
+
+            <div class="col-md-12 mb-4">
+                <h4 class="fw-bold mb-3">Modificar suscripcion</h4>
+                <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+
+                <div class="card-body">
+                    <div class="row g-3">
+
+                        <!-- Nombre del cliente -->
+                        <div class="col-md-12">
+                            <label class="form-label">Nombre del cliente</label>
+                            <div class="form-control" style="pointer-events: none;  backdrop-filter: blur(4px);">
+                                {{ cliente.nombre }}
+                            </div>
+                        </div>
+
+                        <!-- Plan -->
+                        <div class="col-md-12">
+                            <label for="plan" class="form-label">Plan</label>
+                            <select class="form-select" id="plan" name="plan" required>
+                                <option value="" disabled {% if not suscrip_cliente %}selected{% endif %}>Seleccionar</option>
+                                {% for plan in planes %}
+                                <option value="{{ plan.id_plan }}"
+                                    {% if suscrip_cliente and plan.id_plan == suscrip_cliente.id_plan %}selected{% endif %}>
+                                    {{ plan.nombre }} - Q{{ plan.precio }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="col-md-12">
+                            <label for="estado" class="form-label">Estado de suscripción</label>
+                            <select class="form-select" id="estado" name="estado" required>
+                                <option value="" disabled {% if suscrip_cliente is none %}selected{% endif %}>Seleccionar</option>
+                                <option value="1" {% if suscrip_cliente and suscrip_cliente.estado_suscripcion %}selected{% endif %}>Activada</option>
+                                <option value="0" {% if suscrip_cliente and not suscrip_cliente.estado_suscripcion %}selected{% endif %}>Desactivada</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-dark font-monospace" type="submit">
+                                Guardar cambio
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+
+
+
+{% endblock %}

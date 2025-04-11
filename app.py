@@ -27,7 +27,7 @@ migrate = Migrate(app, conexion)
 # Llamar modelos
 from models.usuarios import *
 from models.clientes import *
-
+from models.suscripciones import *
 
 # Crear modelos 
 with app.app_context():
@@ -38,12 +38,13 @@ with app.app_context():
 from controllers.sesion_usuario_controller import sesion_usuario_bp
 from controllers.dashboard_controller import dashboard_bp
 from controllers.clientes_controller import clientes_bp
-
+from controllers.suscrip_controller import suscripciones_bp
 
 # Registro de los blueprints 
 app.register_blueprint(sesion_usuario_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(clientes_bp)
+app.register_blueprint(suscripciones_bp)
 
 
 # Bloquear vistas sin sesion
