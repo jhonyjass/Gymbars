@@ -1,0 +1,138 @@
+<div class="modal fade" id="agregar_pago" tabindex="-1" aria-labelledby="agregar_pago" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="agregar_pago">
+                   Agregar pago
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ url_for('suscripciones_bp.agregar_pago') }}" method="post" class="needs-validation" novalidate>
+
+                    <div class="col-md-12">
+                        <label for="mensualidad" class="form-label">Mensualidad</label>
+                        <select class="form-select" id="mensualidad" name="mensualidad" required>
+                            <option value="" selected disabled>Seleccionar</option>
+                            {% for men in mensualidades_pendientes %}
+                            <option value="{{men.id_mensualidad}}">
+                                {{men.fecha_inicio.strftime('%b')}}, 
+                                {{men.fecha_inicio.strftime('%d %b %Y')}}, 
+                                {{men.fecha_final.strftime('%d %b %Y')}}, 
+                                Q {{men.cantidad}} 
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="fecha_pago" class="form-label">Fecha que pago</label>
+                        <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" required>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="monto" class="form-label">Cantidad a pagar</label>
+                        <input type="number" class="form-control" id="monto" name="monto" maxlength="7" required>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="nota" class="form-label">Nota</label>
+                        <textarea class="form-control" id="nota" name="nota" maxlength="100" required></textarea>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="tipo_pago" class="form-label">Tipo pago</label>
+                        <select class="form-select" id="tipo_pago" name="tipo_pago" required>
+                            <option value="" selected disabled>Seleccionar</option>
+                            {% for tipo in tipo_pagos %}
+                            <option value="{{ tipo.id_tipo_pago }}">
+                                {{tipo.nombre}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-flex justify-content-end justify-content-md-end mt-3">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-dark" type="submit">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% for pago in pagos_cliente_año %}
+<div class="modal fade" id="modalEditarPago{{ pago.id_pago }}" tabindex="-1" aria-labelledby="modalEditarPago{{ pago.id_pago }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalEditarPago{{ pago.id_pago }}">
+                    Editar pago
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ url_for('suscripciones_bp.editar_pago', id_pago=pago.id_pago) }}" method="post" class="needs-validation" novalidate>
+
+                    <div class="col-md-12">
+                        <label for="mensualidad" class="form-label">Mensualidad</label>
+                        <div class="form-control" style="pointer-events: none;  backdrop-filter: blur(4px);">
+                            {{ pago.mensualidad.fecha_inicio.strftime('%b') }},
+                            {{ pago.mensualidad.fecha_inicio.strftime('%d %b %Y') }},
+                            {{ pago.mensualidad.fecha_final.strftime('%d %b %Y') }},
+                            Q {{ pago.mensualidad.cantidad }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="fecha_pago" class="form-label">Fecha que pagó</label>
+                        <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" value="{{ pago.fecha_pago }}" required>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="monto" class="form-label">Cantidad a pagar</label>
+                        <input type="number" class="form-control" id="monto" name="monto" maxlength="7" value="{{ pago.monto }}" required>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="nota" class="form-label">Nota</label>
+                        <textarea class="form-control" id="nota" name="nota" maxlength="100" required>{{ pago.nota }}</textarea>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="tipo_pago" class="form-label">Tipo pago</label>
+                        <select class="form-select" id="tipo_pago" name="tipo_pago" required>
+                            <option value="" disabled>Seleccionar</option>
+                            {% for tipo in tipo_pagos %}
+                            <option value="{{ tipo.id_tipo_pago }}" {% if pago.id_tipo_pago == tipo.id_tipo_pago %}selected{% endif %}>
+                                {{ tipo.nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2 d-flex justify-content-end mt-3">
+                        <button class="btn btn-dark" type="submit">
+                            Actualizar
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

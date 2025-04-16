@@ -96,7 +96,7 @@ function setupCharacterLimit(inputElement) {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Seleccionamos todos los inputs con maxlength y aplicamos la funcion
-    document.querySelectorAll('input[maxlength]').forEach(function (input) {
+    document.querySelectorAll('input[maxlength], textarea[maxlength]').forEach(function (input) {
         setupCharacterLimit(input);
     });
 

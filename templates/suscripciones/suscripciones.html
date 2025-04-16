@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+{% block title %} Suscripciones {% endblock %}
+{% block body %}
+
+<section class="py-3 mb-5">
+
+    <div class="d-flex justify-content-between mb-2 mt-5">
+        <h5 class="fw-bold mt-0">Lista de suscripciones</h5>
+    </div>
+   
+    <div class="col-12 col-lg-12 col-xl-12">
+        <div class="card widget-card border-light-subtle">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Plan</th>
+                                <th>Costo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-suscripciones">
+                            {% for sus in suscripciones_activas%}
+                            <tr>
+                                <td>
+                                    <a href="{{url_for('suscripciones_bp.estado_cuenta_cliente', id_cliente = sus.id_cliente)}}">
+                                        <h6 class="text-secondary-emphasis mb-1">
+                                            {{sus.sub_cliente.nombre}}
+                                        </h6>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{url_for('suscripciones_bp.estado_cuenta_cliente', id_cliente = sus.id_cliente)}}">
+                                        <h6 class="text-secondary-emphasis mb-1 "> 
+                                            {{sus.plan_cliente.nombre}}
+                                        </h6>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{url_for('suscripciones_bp.estado_cuenta_cliente', id_cliente = sus.id_cliente)}}">
+                                        <h6 class="text-secondary-emphasis mb-1 "> 
+                                           Q {{sus.plan_cliente.precio}}
+                                        </h6>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{url_for('suscripciones_bp.estado_cuenta_cliente', id_cliente = sus.id_cliente)}}">
+                                        <h6 class="text-secondary-emphasis mb-1 "> 
+                                           {% if sus.estado_suscripcion == True %}
+                                                <span class="badge text-bg-success">Activa</span>
+                                            {%else%}
+                                                <span class="badge text-bg-danger">Inactiva</span>
+                                           {% endif %}
+                                        </h6>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

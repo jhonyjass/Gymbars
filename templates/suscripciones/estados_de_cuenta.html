@@ -1,0 +1,146 @@
+{% extends "index.html" %}
+{% block title %} Estado de cuenta {% endblock %}
+{% block body %}
+{% include 'suscripciones/modales_suscrip.html' %}
+
+<section class="py-3 mb-5">
+
+    <div class="col-md-12 mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <h4 class="fw-bold mb-0">Estado de cuenta de {{cliente.nombre.split(' ')[0]}}</h4>
+        </div>
+        <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+    </div>
+    
+    <div class="d-flex justify-content-between mb-2 mt-5">
+        <h5 class="fw-bold mt-0">Lista de mensualidades año actual</h5>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-dark font-monospace" data-bs-toggle="modal"
+                data-bs-target="#agregar_pago">
+                Agregar pago
+            </button>
+        </div>
+    </div>
+
+    <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+
+    <div class="col-12 col-lg-12 col-xl-12">
+        <div class="card widget-card border-light-subtle">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th>Fecha inicio</th>
+                                <th>Fecha final</th>
+                                <th>Cantidad a pagar</th>
+                                <th>Cantidad pagadá</th>
+                                <th>Estado de pago</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-estado-cuenta">
+                            {% for men, total_pagado in mensualidades_año %}
+                            <tr>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1">{{men.fecha_inicio.strftime('%d %b %Y')}}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">{{men.fecha_final.strftime('%d %b %Y')}}</h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">Q {{men.cantidad}} </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">Q {{total_pagado}} </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">
+                                        {% if men.estado_pago == True %}
+                                            <span class="badge text-bg-success">Pagado</span>
+                                        {%else%}
+                                            <span class="badge text-bg-danger">Pendiente</span>
+                                        {% endif %}
+                                    </h6>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="py-0 mb-5">
+
+    <div class="d-flex justify-content-between mb-2">
+        <h5 class="fw-bold mt-0">Lista de pagos en el año</h5>
+    </div>
+
+    <hr class="col-md-12" style="border: 1px solid #717375c4; opacity: 0.1;">
+    
+    <div class="col-12 col-lg-12 col-xl-12">
+        <div class="card widget-card border-light-subtle">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mensualidad a pagar</th>
+                                <th>Fecha del pago</th>
+                                <th>Monto dado</th>
+                                <th>Tipo pago</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-pagos">
+                            {% for pago in pagos_cliente_año%}
+                            <tr>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1">
+                                        {{pago.mensualidad.fecha_inicio.strftime('%d %b %Y')}}
+                                        -
+                                        {{pago.mensualidad.fecha_final.strftime('%d %b %Y')}}
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1">
+                                        {{pago.fecha_pago.strftime('%d %b %Y')}}
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">
+                                        Q {{pago.monto}}
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">
+                                        {% if pago.id_tipo_pago == 1%}
+                                            <span class="badge text-bg-success">Efectivo</span>
+                                        {% else %}
+                                            <span class="badge text-bg-primary">{{pago.tipo_pago.nombre}}</span>
+                                        {% endif %}
+                                    </h6>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn font-monospace" 
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalEditarPago{{ pago.id_pago }}">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

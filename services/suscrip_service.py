@@ -3,6 +3,34 @@ from models.suscripciones import *
 
 
 class SuscripcionesService:
+
+    @staticmethod
+    def obtener_suscripciones():
+        return SuscripcionesRepository.obtener_suscripciones_todas()
+    
+    @staticmethod
+    def obtener_sus_activas():
+        return SuscripcionesRepository.obtener_suscripciones_activas()
+    
+    @staticmethod
+    def obtener_sus_inactivas():
+        return SuscripcionesRepository.obtener_suscripciones_inactivas()
+    
+    @staticmethod
+    def obtener_mensualidades_por_cliente(id_cliente):
+        return SuscripcionesRepository.obtener_mensualidades_cliente(id_cliente)
+    
+    @staticmethod
+    def obtener_mensualidades_año_cliente(id_cliente):
+        return SuscripcionesRepository.obtener_mensualidades_cliente_año(id_cliente)
+
+    @staticmethod
+    def obtener_mensualidades_pediente_pago_cliente(id_cliente):
+        return SuscripcionesRepository.obtener_mensualidades_cliente_pendiente_pago(id_cliente)
+    
+    @staticmethod
+    def obtener_mensualidades_pagadas_cliente(id_cliente):
+        return SuscripcionesRepository.obtener_mensualidades_cliente_pagadas(id_cliente)
     
     @staticmethod
     def obtener_planes():
