@@ -64,7 +64,7 @@ class SuscripcionesService:
         SuscripcionesRepository.guardar_suscripcion(nueva_suscripcion)
 
         # Crear la mensualidad inicial
-        SuscripcionesService.crear_mensualidad_inicial(nueva_suscripcion)
+        SuscripcionesService.crear_mensualidad(nueva_suscripcion)
 
         return True
 
@@ -100,7 +100,7 @@ class SuscripcionesService:
                     fecha_inicio,
                     fecha_final
                 ):
-                    SuscripcionesService.crear_mensualidad_inicial(suscripcion)
+                    SuscripcionesService.crear_mensualidad(suscripcion)
 
             return True
 
@@ -109,7 +109,7 @@ class SuscripcionesService:
 
 
     @staticmethod
-    def crear_mensualidad_inicial(suscripcion):
+    def crear_mensualidad(suscripcion):
         try:
             plan = SuscripcionesRepository.obtener_plan_id(suscripcion.id_plan)
             if not plan:
@@ -142,3 +142,33 @@ class SuscripcionesService:
 
         except Exception as e:
             print(f"Error al crear mensualidad inicial: {e}")
+
+
+    @staticmethod
+    def generar_mensualidades_del_mes():
+        suscripciones_activas = SuscripcionesRepository.obtener_suscripciones_activas()
+
+        for suscripcion in suscripciones_activas:
+            fecha_base = suscripcion.fecha_suscripcion
+            hoy = date.today()
+
+            # Crear mensualidad solo si corresponde a este mes
+            if hoy.day == fecha_base.day:
+                año = hoy.year
+                mes = hoy.month + 1
+                if mes > 12:
+                    mes = 1
+                    año += 1
+
+                try:
+                    fecha_final = date(año, mes, fecha_base.day)
+                except ValueError:
+                    # ultimo dia del mes si no existe el dia
+                    ultimo_dia = monthrange(año, mes)[1]
+                    fecha_final = date(año, mes, ultimo_dia)
+
+                # Verifica si ya existe una mensualidad para ese periodo
+                if not SuscripcionesRepository.existe_mensualidad_para_fechas(
+                    suscripcion.id_suscripcion, hoy, fecha_final
+                ):
+                    SuscripcionesService.crear_mensualidad(suscripcion)

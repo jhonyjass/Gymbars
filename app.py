@@ -2,12 +2,16 @@ from flask import Flask
 from flask_migrate import Migrate
 from configuraciones import Configuraciones
 from utils.utils import *
+from utils.scheduler_config import init_scheduler
 from conexion import conexion
 
 
 # Iniciar flask 
 app = Flask(__name__)
 app.config.from_object(Configuraciones)
+
+# Iniciar cron
+init_scheduler(app)
 
 # Instancia base de datos
 conexion.init_app(app)
