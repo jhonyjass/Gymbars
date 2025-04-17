@@ -1,5 +1,7 @@
 from repositories.suscrip_repo import SuscripcionesRepository
 from models.suscripciones import *
+from datetime import date
+from calendar import monthrange
 
 
 class SuscripcionesService:
@@ -61,6 +63,9 @@ class SuscripcionesService:
 
         SuscripcionesRepository.guardar_suscripcion(nueva_suscripcion)
 
+        # Crear la mensualidad inicial
+        SuscripcionesService.crear_mensualidad_inicial(nueva_suscripcion)
+
         return True
 
     @staticmethod
@@ -69,8 +74,71 @@ class SuscripcionesService:
 
         if suscripcion:
             suscripcion.id_plan = data['plan']
+            estado_anterior = suscripcion.estado_suscripcion
             suscripcion.estado_suscripcion = data.get('estado', True)
+
             SuscripcionesRepository.actualizar_suscripcion(suscripcion)
+
+            # Si se reactivo
+            if not estado_anterior and suscripcion.estado_suscripcion:
+                # Validar que no exista mensualidad para esas fechas
+                fecha_inicio = suscripcion.fecha_suscripcion
+                año = fecha_inicio.year
+                mes = fecha_inicio.month + 1
+                if mes > 12:
+                    mes = 1
+                    año += 1
+
+                try:
+                    fecha_final = date(año, mes, fecha_inicio.day)
+                except ValueError:
+                    ultimo_dia = monthrange(año, mes)[1]
+                    fecha_final = date(año, mes, ultimo_dia)
+
+                if not SuscripcionesRepository.existe_mensualidad_para_fechas(
+                    suscripcion.id_suscripcion,
+                    fecha_inicio,
+                    fecha_final
+                ):
+                    SuscripcionesService.crear_mensualidad_inicial(suscripcion)
+
             return True
 
         return False
+
+
+
+    @staticmethod
+    def crear_mensualidad_inicial(suscripcion):
+        try:
+            plan = SuscripcionesRepository.obtener_plan_id(suscripcion.id_plan)
+            if not plan:
+                raise Exception('No se encontró el plan')
+
+            fecha_inicio = suscripcion.fecha_suscripcion
+            año = fecha_inicio.year
+            mes = fecha_inicio.month + 1
+
+            if mes > 12:
+                mes = 1
+                año += 1
+
+            # Calcular fecha final
+            try:
+                fecha_final = date(año, mes, fecha_inicio.day)
+            except ValueError:
+                ultimo_dia = monthrange(año, mes)[1]
+                fecha_final = date(año, mes, ultimo_dia)
+
+            nueva_mensualidad = mensualidades(
+                id_suscripcion=suscripcion.id_suscripcion,
+                fecha_inicio=fecha_inicio,
+                fecha_final=fecha_final,
+                estado_pago=False,
+                cantidad=plan.precio
+            )
+
+            SuscripcionesRepository.guardar_mensualidad(nueva_mensualidad)
+
+        except Exception as e:
+            print(f"Error al crear mensualidad inicial: {e}")

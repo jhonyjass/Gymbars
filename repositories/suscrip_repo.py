@@ -62,6 +62,18 @@ class SuscripcionesRepository:
         return planes.query.all()
     
     @staticmethod
+    def obtener_plan_id(id_plan):
+        return planes.query.filter_by(id_plan = id_plan).first()
+    
+    @staticmethod
+    def existe_mensualidad_para_fechas(id_suscripcion, fecha_inicio, fecha_final):
+        return mensualidades.query.filter_by(
+            id_suscripcion=id_suscripcion,
+            fecha_inicio=fecha_inicio,
+            fecha_final=fecha_final
+        ).first() is not None
+    
+    @staticmethod
     def obtener_suscripcion_por_cliente(id_cliente):
         return suscripciones.query.filter_by(id_cliente = id_cliente).first()
     
