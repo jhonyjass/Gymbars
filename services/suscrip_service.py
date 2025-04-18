@@ -2,7 +2,7 @@ from repositories.suscrip_repo import SuscripcionesRepository
 from models.suscripciones import *
 from datetime import date
 from calendar import monthrange
-
+from utils.correo_config import *
 
 class SuscripcionesService:
 
@@ -65,6 +65,10 @@ class SuscripcionesService:
 
         # Crear la mensualidad inicial
         SuscripcionesService.crear_mensualidad(nueva_suscripcion)
+
+        # Enviar correo
+        cliente = nueva_suscripcion.sub_cliente
+        enviar_correo_bienvenida(cliente)
 
         return True
 
@@ -139,6 +143,7 @@ class SuscripcionesService:
             )
 
             SuscripcionesRepository.guardar_mensualidad(nueva_mensualidad)
+            return nueva_mensualidad
 
         except Exception as e:
             print(f"Error al crear mensualidad inicial: {e}")
@@ -171,4 +176,11 @@ class SuscripcionesService:
                 if not SuscripcionesRepository.existe_mensualidad_para_fechas(
                     suscripcion.id_suscripcion, hoy, fecha_final
                 ):
-                    SuscripcionesService.crear_mensualidad(suscripcion)
+                    # Crear mensualidad
+                    nueva = SuscripcionesService.crear_mensualidad(suscripcion)
+
+                    if nueva:
+                        cliente = suscripcion.sub_cliente
+                        enviar_correo_mensualidad(cliente, hoy, fecha_final, nueva.cantidad)
+                    else:
+                        print(f"No se pudo crear mensualidad para la suscripción ID {suscripcion.id_suscripcion}")
