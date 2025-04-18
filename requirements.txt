@@ -10,3 +10,4 @@ python-dotenv == 1.0.1
 python-decouple == 3.8
 pdfkit == 1.0.0
 marshmallow == 3.26.1
+resend == 2.7.0
