@@ -3,10 +3,11 @@ from services.dashboard_service import DashboardService
 from services.reportes_service import ReporteService
 from routes.rutas import dashboard_bp
 from utils.pdf_config import *
-
+from utils.decoradores import *
 
 
 @dashboard_bp.route('/')
+@administrador_requerido
 def dashboard():
 
     ingresos_mensuales = ReporteService.obtener_ingresos_recibidos()
@@ -21,6 +22,7 @@ def dashboard():
 
 
 @dashboard_bp.route('/reportes', methods = ['GET', 'POST'])
+@administrador_requerido
 def reportes():
 
     return render_template('dashboard/lista_reportes.html')
@@ -28,6 +30,7 @@ def reportes():
 
 
 @dashboard_bp.route('/clientes_pendiente_pago', methods = ['GET','POST'])
+@administrador_requerido
 def clientes_pendiente_pago():
     try:
         datos_clientes = ReporteService.obtener_clientes_deudores()
@@ -43,6 +46,7 @@ def clientes_pendiente_pago():
 
 
 @dashboard_bp.route('/ingresos_del_dia', methods = ['GET','POST'])
+@administrador_requerido
 def ingresos_del_dia():
     try:
         ingresos = ReporteService.obtener_ingresos_diarios()
@@ -58,6 +62,7 @@ def ingresos_del_dia():
 
 
 @dashboard_bp.route('/reporte_ingresos_mes_año', methods=['GET', 'POST'])
+@administrador_requerido
 def reporte_ingresos_mes_año():
     if request.method == 'POST':
         mes = int(request.form.get('mes'))

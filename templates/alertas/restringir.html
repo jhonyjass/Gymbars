@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block title %} No autorizado {% endblock %}
+{% block body %}
+<section class="d-flex align-items-center min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center align-items-center text-center">
+
+            <div class="col-md-6 d-flex justify-content-center mb-4 mb-md-0">
+                <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+                    type="module"></script>
+                <dotlottie-player src="https://lottie.host/40887d6a-15ff-457a-b876-1fa73b958d59/QVdpwApdgS.lottie"
+                    background="transparent" speed="1" style="width: 100%; max-width: 400px; height: auto;" loop
+                    autoplay>
+                </dotlottie-player>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="text-center text-md-start">
+                    <h1 class="display-5 fw-bold text-muted">Acceso denegado</h1>
+                    <h2 class="fw-bold font-monospace h5 text-secondary">Hola {{ session['usuario'].usuario }}</h2>
+                    <p class="text-secondary">
+                        No tienes permisos de <strong>administrador</strong> para acceder a esta sección.<br>
+                        Si crees que esto es un error, por favor contacta al administrador del sistema.
+                    </p>
+                    <a href="{{url_for('clientes_bp.lista_clientes')}}" 
+                        class="btn btn-outline-secondary mt-3"
+                        style="background-color: transparent !important;">
+                        Volver al inicio
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
