@@ -1,0 +1,42 @@
+<table style="width: 100%; text-align: center; margin-bottom: 40px;">
+    <tbody>
+        <tr>
+            <td style="font-size: 45px; font-weight: bold;">
+                Gymbars
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 20px;">
+                Reporte de ingresos por pagos en el mes {{ nombre_mes }} del año {{ año }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% set total = [0] %}
+<table style="border-collapse: collapse; width: 100%; height: 72px; font-size: 20px; margin-top: 80px;" border="0">
+    <tbody>
+        <tr style="height: 18px; background: #EBEBEB;">
+            <td style="width: 4.5%;"><strong>#</strong></td>
+            <td style="width: 12.5%;"><strong>Cliente</strong></td>
+            <td style="width: 12.5%;"><strong>Fecha de pago</strong></td>
+            <td style="width: 12.5%;"><strong>Tipo de pago</strong></td>
+            <td style="width: 12.5%;"><strong>Monto</strong></td>
+        </tr>
+        {% for ingreso in ingresos %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ ingreso.nombre_cliente }}</td>
+            <td>{{ ingreso.fecha_pago.strftime('%d-%m-%Y') }}</td>
+            <td>{{ ingreso.tipo_pago }}</td>
+            <td>Q {{ '{:,}'.format(ingreso.monto) }}</td>
+        </tr>
+        {% set _ = total.__setitem__(0, total[0] + ingreso.monto) %}
+        {% endfor %}
+        <tr style="background: #f5f5f5; height: 30px;">
+            <td colspan="4"><strong>Total ingresado</strong></td>
+            <td><strong>Q {{ '{:,}'.format(total[0]) }}</strong></td>
+        </tr>
+    </tbody>
+</table>

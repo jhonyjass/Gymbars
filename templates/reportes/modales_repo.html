@@ -1,0 +1,54 @@
+<div class="modal fade" id="repoIngresosAñoMes" tabindex="-1" aria-labelledby="repoIngresosAñoMes" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="repoIngresosAñoMes">
+                    Ingresar datos par reporte
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('dashboard_bp.reporte_ingresos_mes_año') }}"
+                    method="post" class="needs-validation" novalidate>
+
+                    <div class="col-md-12">
+                        <label for="mes" class="form-label">Mes</label>
+                        <select class="form-select" aria-label="Default select example" id="mes" name="mes" required>
+                            <option value="" selected disabled>Seleccionar mes</option>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <label for="año" class="form-label">Mes</label>
+                        <select class="form-select" aria-label="Default select example" id="año" name="año" required>
+                            <option value="" selected disabled>Seleccionar mes</option>
+                            {% for año in range(2020, 2031) %}
+                            <option value="{{año}}">{{año}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2 d-flex justify-content-center justify-content-md-end mt-3">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-dark" type="submit">
+                                Ver reporte
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

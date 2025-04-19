@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% block title %} Reportes {% endblock %}
+{% block body %}
+{% include "reportes/modales_repo.html" %}
+
+<section class="py-3 mb-5">
+    <div class="d-flex justify-content-between mb-2 mt-5">
+        <h5 class="fw-bold mt-0">Lista de reportes</h5>
+    </div>
+
+    <div class="col-12 col-lg-12 col-xl-12">
+
+        <div class="card widget-card border-light-subtle mb-3">
+            <div class="card-body d-flex justify-content-between">
+                <p class="card-title font-monospace">Clientes con pagos pendientes</p>
+                <a href="{{ url_for('dashboard_bp.clientes_pendiente_pago') }}" class="btn">
+                    Ver reporte
+                </a>
+            </div>
+        </div>
+
+        <div class="card widget-card border-light-subtle mb-3">
+            <div class="card-body d-flex justify-content-between">
+                <p class="card-title font-monospace">Ver los ingresos del dia</p>
+                <a href="{{ url_for('dashboard_bp.ingresos_del_dia') }}" class="btn">
+                    Ver reporte
+                </a>
+            </div>
+        </div>
+
+        <div class="card widget-card border-light-subtle mb-3">
+            <div class="card-body d-flex justify-content-between">
+                <p class="card-title font-monospace">Ver ingresos de un año y mes especifico</p>
+                <button type="button" class="btn" data-bs-toggle="modal"
+                    data-bs-target="#repoIngresosAñoMes">
+                    Realizar reporte
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

@@ -59,3 +59,64 @@ class ReportesRepository:
             "activas": int(resultado.activas),
             "inactivas": int(resultado.inactivas)
         }
+    
+
+    @staticmethod
+    def obtener_clientes_con_pagos_pendientes():
+        return (
+            conexion.session.query(
+                clientes.id_cliente,
+                clientes.nombre,
+                clientes.correo,
+                mensualidades.fecha_inicio,
+                mensualidades.fecha_final,
+                mensualidades.cantidad,
+            )
+            .join(suscripciones, clientes.id_cliente == suscripciones.id_cliente)
+            .join(mensualidades, suscripciones.id_suscripcion == mensualidades.id_suscripcion)
+            .filter(mensualidades.estado_pago == False)
+            .order_by(clientes.id_cliente, mensualidades.fecha_inicio)
+            .all()
+        )
+    
+    @staticmethod
+    def obtener_ingresos_del_dia():
+        hoy = date.today()
+        return (
+            conexion.session.query(
+                clientes.nombre.label('nombre_cliente'),
+                clientes.correo,
+                pagos.monto,
+                pagos.fecha_pago,
+                tipo_pagos.nombre.label('tipo_pago')
+            )
+            .join(mensualidades, mensualidades.id_mensualidad == pagos.id_mensualidad)
+            .join(suscripciones, suscripciones.id_suscripcion == mensualidades.id_suscripcion)
+            .join(clientes, clientes.id_cliente == suscripciones.id_cliente)
+            .join(tipo_pagos, tipo_pagos.id_tipo_pago == pagos.id_tipo_pago)
+            .filter(pagos.fecha_pago == hoy)
+            .order_by(pagos.fecha_pago)
+            .all()
+        )
+    
+    @staticmethod
+    def obtener_ingresos_por_mes_año(mes, año):
+        return (
+            conexion.session.query(
+                clientes.nombre.label('nombre_cliente'),
+                clientes.correo,
+                pagos.monto,
+                pagos.fecha_pago,
+                tipo_pagos.nombre.label('tipo_pago')
+            )
+            .join(mensualidades, mensualidades.id_mensualidad == pagos.id_mensualidad)
+            .join(suscripciones, suscripciones.id_suscripcion == mensualidades.id_suscripcion)
+            .join(clientes, clientes.id_cliente == suscripciones.id_cliente)
+            .join(tipo_pagos, tipo_pagos.id_tipo_pago == pagos.id_tipo_pago)
+            .filter(extract('month', pagos.fecha_pago) == mes)
+            .filter(extract('year', pagos.fecha_pago) == año)
+            .order_by(pagos.fecha_pago)
+            .all()
+        )
+    
+
