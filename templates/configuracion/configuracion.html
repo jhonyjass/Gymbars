@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+{% block title %} Configuraciones {% endblock %}
+{% block body %}
+{% include "configuracion/config_modales.html" %}
+{% include 'alertas/eliminar.html' %}
+
+
+<section class="py-3 mb-5">
+
+    <div class="d-flex justify-content-between mb-2 mt-5">
+        <h5 class="fw-bold mt-0">Lista de usuarios</h5>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-dark font-monospace" data-bs-toggle="modal"
+                data-bs-target="#nuevoUsuario">
+                Agregar usuario
+            </button>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-12 col-xl-12">
+        <div class="card widget-card border-light-subtle">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Tipo usuario</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-usuarios">
+                            {% for usuario in usuarios %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar rounded-circle text-white d-flex align-items-center justify-content-center me-3"
+                                            style="width: 35px; height: 35px;">
+                                            {{ usuario.nombre[0] | upper }}
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span class="">{{ usuario.nombre }}</span>
+                                            <small class="text-secondary">{{ usuario.usuario }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <h6 class="text-secondary-emphasis mb-1 ">
+                                        {% if usuario.tipo_usuario.tipo_usuario == 'Administrador' %}
+                                        <span class="badge text-bg-primary">{{usuario.tipo_usuario.tipo_usuario}}</span>
+                                        {% else %}
+                                        <span
+                                            class="badge text-bg-secondary">{{usuario.tipo_usuario.tipo_usuario}}</span>
+                                        {% endif %}
+                                    </h6>
+                                </td>
+
+                                <td>
+                                    <button type="button" class="btn text-danger eliminar-btn" data-bs-toggle="modal"
+                                        data-bs-target="#confirmarEliminar"
+                                        data-action-url="{{ url_for('config_bp.eliminar_usuario', id_usuario=usuario.id_usuario) }}">
+                                        <i class="bi bi-trash3 me-2"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

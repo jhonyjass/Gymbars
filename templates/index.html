@@ -79,7 +79,7 @@
                             <strong class="font-monospace">{{ session['usuario']['nombre'] }}</strong>
                         </a>
                         <ul class="dropdown-menu dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="">Configuraciones</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('config_bp.configuraciones')}}">Configuraciones</a></li>
                             <li><a class="dropdown-item" href="{{url_for('sesion_usuario_bp.editar_perfil')}}">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -133,7 +133,7 @@
                             <strong class="font-monospace">{{ session['usuario']['nombre'] }}</strong>
                         </a>
                         <ul class="dropdown-menu dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="">Configuraciones</a></li>
+                            <li><a class="dropdown-item" href="{{url_for('config_bp.configuraciones')}}">Configuraciones</a></li>
                             <li><a class="dropdown-item" href="{{url_for('sesion_usuario_bp.editar_perfil')}}">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -195,6 +195,11 @@
     {% if 'dashboard' in request.path %}
     <script src="{{ url_for('static', filename='js/graficas.js') }}"></script>
     {% endif %}
+
+    {% if 'configuraciones' in request.path or 'perfil' in request.path %}
+    <script src="{{ url_for('static', filename='js/usuarios.js') }}"></script>
+    {% endif %}
+
 
     <script src="{{url_for('static', filename='js/js.js')}}"></script>
 

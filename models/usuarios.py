@@ -18,7 +18,7 @@ class tipo_usuarios(conexion.Model):
 class usuarios(conexion.Model):
     __tablename__ = 'usuarios'
 
-    id_usuario = conexion.Column(Integer, primary_key=True)
+    id_usuario = conexion.Column(Integer, primary_key=True, autoincrement=True)
     id_tipo_usuario = conexion.Column(Integer,ForeignKey('tipo_usuarios.id_tipo_usuario'))
     nombre = conexion.Column(String(length=30))
     usuario = conexion.Column(String(length=30))

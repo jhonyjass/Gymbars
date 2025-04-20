@@ -43,12 +43,14 @@ from controllers.sesion_usuario_controller import sesion_usuario_bp
 from controllers.dashboard_controller import dashboard_bp
 from controllers.clientes_controller import clientes_bp
 from controllers.suscrip_controller import suscripciones_bp
+from controllers.config_controller import config_bp
 
 # Registro de los blueprints 
 app.register_blueprint(sesion_usuario_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(clientes_bp)
 app.register_blueprint(suscripciones_bp)
+app.register_blueprint(config_bp)
 
 
 # Bloquear vistas sin sesion

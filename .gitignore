@@ -2,7 +2,7 @@
 migrations/
 bin/
 wkhtmltopdf.exe
-
+test/
 
 
 # Byte-compiled / optimized / DLL files
